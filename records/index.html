@@ -655,4 +655,22 @@ function renderGrid(items) {
     <a class="album" href="${escapeAttr(r.discogsUrl || '#')}" target="_blank" rel="noopener" aria-label="${escapeAttr(r.artist)} — ${escapeAttr(r.title)}">
       <div class="album-fallback"><b>${escapeHtml(r.title)}</b>${escapeHtml(r.artist)}</div>
       <img src="${escapeAttr(r.thumb)}" alt="" loading="lazy" onerror="this.remove();"/>
-      <div class="album-o
+      <div class="album-overlay">
+        <span class="album-artist">${escapeHtml(r.artist)}</span>
+        <span class="album-title">${escapeHtml(r.title)}</span>
+        <span class="album-year">${r.year || ''}</span>
+      </div>
+    </a>
+  `).join('');
+}
+
+/* ---------- Utilities ---------- */
+function unique(arr) { return [...new Set(arr)].filter(Boolean); }
+function countBy(arr) { return arr.reduce((a, v) => (a[v] = (a[v] || 0) + 1, a), {}); }
+function escapeHtml(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c])); }
+function escapeAttr(s) { return escapeHtml(s); }
+
+init();
+</script>
+</body>
+</html>
