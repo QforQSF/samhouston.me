@@ -46,7 +46,7 @@
     .hero-tile { display: flex; flex-direction: column; text-decoration: none; color: inherit; cursor: pointer; position: relative; transition: transform 0.15s; background: none; border: none; padding: 0; text-align: left; font: inherit; }
     .hero-tile:hover { transform: translateY(-3px); }
     .hero-cover { position: relative; aspect-ratio: 1; border-radius: 4px; overflow: hidden; background: var(--card); box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 0.75rem; }
-    .hero-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; z-index: 1; }
     .hero-cover-fallback { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0.75rem; text-align: center; background: linear-gradient(135deg, #e8e3dc, #d4cec4); color: var(--muted); font-size: 0.65rem; }
     .hero-cover-fallback b { color: var(--ink); font-family: 'Fraunces', serif; font-size: 0.8rem; font-weight: 600; line-height: 1.2; display: block; margin-bottom: 0.2rem; }
     .hero-shuffle { position: absolute; top: 0.5rem; right: 0.5rem; width: 32px; height: 32px; border-radius: 50%; background: rgba(13,13,13,0.75); color: #fff; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; transition: opacity 0.15s, background 0.15s; z-index: 2; }
@@ -100,10 +100,10 @@
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(115px, 1fr)); gap: 0.75rem; margin-bottom: 4rem; }
     .album { position: relative; aspect-ratio: 1; border-radius: 3px; overflow: hidden; background: var(--card); cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; text-decoration: none; display: block; }
     .album:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
-    .album img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .album img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; z-index: 1; }
     .album-fallback { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0.5rem; text-align: center; color: var(--muted); font-size: 0.6rem; background: linear-gradient(135deg, #e8e3dc, #d4cec4); }
     .album-fallback b { color: var(--ink); font-family: 'Fraunces', serif; font-size: 0.72rem; font-weight: 600; line-height: 1.15; margin-bottom: 0.2rem; display: block; }
-    .album-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 45%, rgba(13,13,13,0.92) 100%); opacity: 0; transition: opacity 0.15s; display: flex; flex-direction: column; justify-content: flex-end; padding: 0.6rem 0.7rem; color: #fff; pointer-events: none; }
+    .album-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 45%, rgba(13,13,13,0.92) 100%); opacity: 0; transition: opacity 0.15s; display: flex; flex-direction: column; justify-content: flex-end; padding: 0.6rem 0.7rem; color: #fff; pointer-events: none; z-index: 2; }
     .album:hover .album-overlay { opacity: 1; }
     .album-artist { font-size: 0.62rem; color: rgba(255,255,255,0.85); font-style: italic; font-family: 'Fraunces', serif; line-height: 1.2; }
     .album-title { font-size: 0.7rem; font-weight: 500; line-height: 1.15; margin: 0.15rem 0 0.2rem; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
@@ -655,22 +655,4 @@ function renderGrid(items) {
     <a class="album" href="${escapeAttr(r.discogsUrl || '#')}" target="_blank" rel="noopener" aria-label="${escapeAttr(r.artist)} — ${escapeAttr(r.title)}">
       <div class="album-fallback"><b>${escapeHtml(r.title)}</b>${escapeHtml(r.artist)}</div>
       <img src="${escapeAttr(r.thumb)}" alt="" loading="lazy" onerror="this.remove();"/>
-      <div class="album-overlay">
-        <span class="album-artist">${escapeHtml(r.artist)}</span>
-        <span class="album-title">${escapeHtml(r.title)}</span>
-        <span class="album-year">${r.year || ''}</span>
-      </div>
-    </a>
-  `).join('');
-}
-
-/* ---------- Utilities ---------- */
-function unique(arr) { return [...new Set(arr)].filter(Boolean); }
-function countBy(arr) { return arr.reduce((a, v) => (a[v] = (a[v] || 0) + 1, a), {}); }
-function escapeHtml(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c])); }
-function escapeAttr(s) { return escapeHtml(s); }
-
-init();
-</script>
-</body>
-</html>
+      <div class="album-o
