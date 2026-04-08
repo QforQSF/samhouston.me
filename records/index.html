@@ -73,6 +73,13 @@
     .sort-wrap select:focus { outline: none; border-color: var(--accent); }
     .clear-btn { font-family: 'DM Sans', sans-serif; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.35rem 0.9rem; border-radius: 20px; background: transparent; border: 1.5px solid var(--accent); color: var(--accent); cursor: pointer; transition: all 0.15s; }
     .clear-btn:hover { background: var(--accent); color: #fff; }
+    .search-wrap { position: relative; display: flex; align-items: center; min-width: 220px; }
+    .search-wrap svg { position: absolute; left: 0.75rem; width: 14px; height: 14px; color: var(--muted); pointer-events: none; }
+    .search-input { font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: var(--ink); background: var(--paper); border: 1.5px solid rgba(0,0,0,0.12); border-radius: 20px; padding: 0.4rem 0.85rem 0.4rem 2.1rem; width: 100%; transition: border-color 0.15s; }
+    .search-input::placeholder { color: var(--muted); }
+    .search-input:focus { outline: none; border-color: var(--accent); }
+    /* Hide hero grid + filter details while a search is active */
+    .page.searching .hero-grid, .page.searching details.filter-details { display: none; }
 
     /* Filter pill bars — collapsible to save space */
     details.filter-details { margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 1.25rem; }
@@ -163,6 +170,10 @@
   <!-- =============== FILTER + SORT CONTROLS =============== -->
   <section class="controls" aria-label="Filter and sort">
     <div class="controls-left">
+      <div class="search-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" class="search-input" id="searchInput" placeholder="Search artist or title…" aria-label="Search records"/>
+      </div>
       <div class="result-count"><b id="resultCount">0</b> showing</div>
       <div class="active-filters" id="activeFilters"></div>
     </div>
@@ -243,6 +254,7 @@
 
 let collection = [];
 let activeFilters = { genre: null, decade: null, format: null, label: null, artist: null };
+let searchQuery = '';
 let currentSort = 'added-desc';
 let randomPick = null; // initially ISO-week seeded, shuffle button re-rolls
 
@@ -272,8 +284,20 @@ async function init() {
   });
   document.getElementById('clearFilters').addEventListener('click', () => {
     activeFilters = { genre: null, decade: null, format: null, label: null, artist: null };
+    searchQuery = '';
+    document.getElementById('searchInput').value = '';
     document.querySelectorAll('.filter-btn.active').forEach(b => b.classList.remove('active'));
     applyFilters();
+  });
+
+  // Search: debounced 150ms so typing stays smooth even on big collections
+  let searchTimer;
+  document.getElementById('searchInput').addEventListener('input', (e) => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => {
+      searchQuery = e.target.value.trim().toLowerCase();
+      applyFilters();
+    }, 150);
   });
 
   renderStatsStrip();
@@ -564,12 +588,18 @@ function applyFilters() {
     if (activeFilters.format && r.format !== activeFilters.format) return false;
     if (activeFilters.label && r.label !== activeFilters.label) return false;
     if (activeFilters.artist && r.artist !== activeFilters.artist) return false;
+    if (searchQuery) {
+      const haystack = `${r.artist} ${r.title}`.toLowerCase();
+      if (!haystack.includes(searchQuery)) return false;
+    }
     return true;
   });
   sortRecords(filtered, currentSort);
   renderGrid(filtered);
   renderActiveChips();
   document.getElementById('resultCount').textContent = filtered.length;
+  // Hide hero tiles + collapsible filters while a search is active
+  document.querySelector('.page').classList.toggle('searching', !!searchQuery);
 }
 
 function sortRecords(arr, mode) {
@@ -594,14 +624,21 @@ function sortRecords(arr, mode) {
 function renderActiveChips() {
   const container = document.getElementById('activeFilters');
   const chips = [];
+  if (searchQuery) chips.push({ key: '__search', value: `“${searchQuery}”` });
   Object.entries(activeFilters).forEach(([k, v]) => {
     if (v) chips.push({ key: k, value: v });
   });
   container.innerHTML = chips.map(c => `<button class="active-chip" data-key="${c.key}" data-value="${escapeAttr(c.value)}"><span>${escapeHtml(c.value)}</span><span class="x">×</span></button>`).join('');
   container.querySelectorAll('.active-chip').forEach(chip => {
     chip.addEventListener('click', () => {
-      activeFilters[chip.dataset.key] = null;
-      document.querySelectorAll(`.filter-btn[data-key="${chip.dataset.key}"]`).forEach(b => b.classList.remove('active'));
+      const key = chip.dataset.key;
+      if (key === '__search') {
+        searchQuery = '';
+        document.getElementById('searchInput').value = '';
+      } else {
+        activeFilters[key] = null;
+        document.querySelectorAll(`.filter-btn[data-key="${key}"]`).forEach(b => b.classList.remove('active'));
+      }
       applyFilters();
     });
   });
