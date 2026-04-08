@@ -1,0 +1,40 @@
+name: Refresh Discogs Collection
+
+# Runs weekly and commits any updates (new records, new covers) back to main.
+# Also exposes a manual "Run workflow" button.
+on:
+  schedule:
+    - cron: '0 8 * * 1'   # Mondays at 08:00 UTC
+  workflow_dispatch:       # manual trigger button in the Actions tab
+
+permissions:
+  contents: write          # needed to commit refreshed data back to the repo
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch collection from Discogs
+        env:
+          DISCOGS_TOKEN: ${{ secrets.DISCOGS_TOKEN }}
+        run: node records/fetch-collection.mjs
+
+      - name: Commit changes if any
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add records/collection.json records/covers
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Refresh Discogs collection [skip ci]"
+            git push
+          fi
