@@ -1,5 +1,43 @@
 [
   {
+    "id": 774430,
+    "artist": "David Bowie",
+    "title": "\"Heroes\"",
+    "year": 1977,
+    "genre": [
+      "Electronic",
+      "Rock"
+    ],
+    "style": [
+      "Pop Rock",
+      "Prog Rock",
+      "Experimental"
+    ],
+    "format": "Vinyl",
+    "label": "RCA",
+    "thumb": "covers/774430.jpg",
+    "discogsUrl": "https://www.discogs.com/release/774430",
+    "dateAdded": "2026-04-25T15:48:20-07:00"
+  },
+  {
+    "id": 24829847,
+    "artist": "No Pressure",
+    "title": "No Pressure",
+    "year": 2022,
+    "genre": [
+      "Rock"
+    ],
+    "style": [
+      "Punk",
+      "Pop Punk"
+    ],
+    "format": "Vinyl",
+    "label": "Triple-B Records",
+    "thumb": "covers/24829847.jpg",
+    "discogsUrl": "https://www.discogs.com/release/24829847",
+    "dateAdded": "2026-04-25T15:46:16-07:00"
+  },
+  {
     "id": 36364564,
     "artist": "No Pressure",
     "title": "LP Promo",
@@ -304,7 +342,7 @@
     ],
     "format": "Vinyl",
     "label": "Rawkus",
-    "thumb": "",
+    "thumb": "covers/3152546.jpg",
     "discogsUrl": "https://www.discogs.com/release/3152546",
     "dateAdded": "2026-01-20T17:44:56-08:00"
   },
