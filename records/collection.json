@@ -1,5 +1,183 @@
 [
   {
+    "id": 37074204,
+    "artist": "Joff Bush",
+    "title": "Up Here (The Orchestral Album)",
+    "year": 2026,
+    "genre": [
+      "Classical",
+      "Children's",
+      "Stage & Screen"
+    ],
+    "style": [
+      "Orchestra",
+      "Score",
+      "Soundtrack",
+      "Theme"
+    ],
+    "format": "Vinyl",
+    "label": "Demon Records",
+    "thumb": "covers/37074204.jpg",
+    "discogsUrl": "https://www.discogs.com/release/37074204",
+    "dateAdded": "2026-04-29T19:35:09-07:00"
+  },
+  {
+    "id": 37106571,
+    "artist": "Jurassic 5",
+    "title": "Quality Control",
+    "year": 2026,
+    "genre": [
+      "Hip Hop"
+    ],
+    "style": [],
+    "format": "Vinyl",
+    "label": "Get On Down",
+    "thumb": "covers/37106571.jpg",
+    "discogsUrl": "https://www.discogs.com/release/37106571",
+    "dateAdded": "2026-04-29T19:34:39-07:00"
+  },
+  {
+    "id": 37108089,
+    "artist": "Violet Grohl",
+    "title": "What's Heaven Without You",
+    "year": 2026,
+    "genre": [
+      "Rock"
+    ],
+    "style": [
+      "Alternative Rock"
+    ],
+    "format": "Vinyl",
+    "label": "Auroura Records",
+    "thumb": "covers/37108089.jpg",
+    "discogsUrl": "https://www.discogs.com/release/37108089",
+    "dateAdded": "2026-04-29T19:34:24-07:00"
+  },
+  {
+    "id": 2520086,
+    "artist": "Ra Ra Riot",
+    "title": "The Orchard",
+    "year": 2010,
+    "genre": [
+      "Rock"
+    ],
+    "style": [
+      "Alternative Rock",
+      "Indie Rock"
+    ],
+    "format": "Vinyl",
+    "label": "Barsuk Records",
+    "thumb": "covers/2520086.jpg",
+    "discogsUrl": "https://www.discogs.com/release/2520086",
+    "dateAdded": "2026-04-29T19:33:57-07:00"
+  },
+  {
+    "id": 13390804,
+    "artist": "Mort Garson",
+    "title": "Mother Earth's Plantasia",
+    "year": 2019,
+    "genre": [
+      "Electronic"
+    ],
+    "style": [
+      "Experimental",
+      "Ambient"
+    ],
+    "format": "Vinyl",
+    "label": "Sacred Bones Records",
+    "thumb": "covers/13390804.jpg",
+    "discogsUrl": "https://www.discogs.com/release/13390804",
+    "dateAdded": "2026-04-29T19:32:54-07:00"
+  },
+  {
+    "id": 35120087,
+    "artist": "King Princess",
+    "title": "Girl Violence",
+    "year": 2025,
+    "genre": [
+      "Pop"
+    ],
+    "style": [
+      "Indie Pop",
+      "Alt-Pop"
+    ],
+    "format": "Vinyl",
+    "label": "section 1",
+    "thumb": "covers/35120087.jpg",
+    "discogsUrl": "https://www.discogs.com/release/35120087",
+    "dateAdded": "2026-04-29T19:31:21-07:00"
+  },
+  {
+    "id": 35909035,
+    "artist": "Viagra Boys",
+    "title": "Consistency Of Energy / Call Of The Wild",
+    "year": 2025,
+    "genre": [
+      "Rock"
+    ],
+    "style": [
+      "Post-Punk"
+    ],
+    "format": "Vinyl",
+    "label": "Year0001",
+    "thumb": "covers/35909035.jpg",
+    "discogsUrl": "https://www.discogs.com/release/35909035",
+    "dateAdded": "2026-04-29T19:30:39-07:00"
+  },
+  {
+    "id": 14674213,
+    "artist": "Queen",
+    "title": "Live Killers",
+    "year": 1979,
+    "genre": [
+      "Rock"
+    ],
+    "style": [
+      "Hard Rock",
+      "Pop Rock"
+    ],
+    "format": "Vinyl",
+    "label": "Elektra",
+    "thumb": "covers/14674213.jpg",
+    "discogsUrl": "https://www.discogs.com/release/14674213",
+    "dateAdded": "2026-04-29T19:30:21-07:00"
+  },
+  {
+    "id": 10765185,
+    "artist": "Arlo Guthrie",
+    "title": "One Night",
+    "year": 1978,
+    "genre": [
+      "Folk, World, & Country"
+    ],
+    "style": [
+      "Folk"
+    ],
+    "format": "Vinyl",
+    "label": "Warner Bros. Records",
+    "thumb": "covers/10765185.jpg",
+    "discogsUrl": "https://www.discogs.com/release/10765185",
+    "dateAdded": "2026-04-29T19:29:44-07:00"
+  },
+  {
+    "id": 7986320,
+    "artist": "Sleater-Kinney",
+    "title": "Sleater-Kinney",
+    "year": 2014,
+    "genre": [
+      "Rock"
+    ],
+    "style": [
+      "Punk",
+      "Indie Rock"
+    ],
+    "format": "Vinyl",
+    "label": "Sub Pop",
+    "thumb": "covers/7986320.jpg",
+    "discogsUrl": "https://www.discogs.com/release/7986320",
+    "dateAdded": "2026-04-29T19:29:02-07:00"
+  },
+  {
     "id": 774430,
     "artist": "David Bowie",
     "title": "\"Heroes\"",
@@ -4130,7 +4308,7 @@
   {
     "id": 19185169,
     "artist": "Muse",
-    "title": "Origin Of Symmetry: XX Anniversary RemiXX",
+    "title": "Origin Of Symmetry (XX Anniversary RemiXX)",
     "year": 2021,
     "genre": [
       "Rock"
